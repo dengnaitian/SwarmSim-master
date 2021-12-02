@@ -112,7 +112,7 @@ for i = 1:iterator
         velocity_input = min(9,velocity(j-1));
         controls{j}.vRef = velocity_input;
     end
-    velocity_input
+    velocity_input;
     controls{12}.wRef = pycontrol.target_wRef;
     controls{12}.vRef = pycontrol.target_vRef;
     last_pose = pose;   
