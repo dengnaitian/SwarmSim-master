@@ -36,8 +36,8 @@ L = D - A ;
 M = L + b;
 [m_eig_vector,m_eig] = eig(M);
 [eig_value,ind] = sort(diag(m_eig));
-A = A * 0.5;
-B = B * 0.1;
+A = A * 0.1;
+B = B * 0.8;
 %p = zeros(size*resolution);
 map_gen = MapGenerate(size,size,space,resolution);
 [p,map_gen] = map_gen.addBounds(2);
@@ -79,26 +79,12 @@ data_demo = zeros(8,230);
 goal_x = last_pose(1,12);
 goal_y = last_pose(2,12);
 goal_pose = [goal_x;goal_y];
-iterator = 999;
+iterator = 500;
 rec_traj = zeros(iterator,22);
 rec_dist = zeros(iterator,11);
 rec_speed = zeros(iterator,11);
 allcostValue = zeros(iterator+1,1);
 for i = 1:iterator
-    B =  binornd(1,[0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.7,0.7]);
-%     B =  binornd(1,[0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3]);
-    b = zeros(10);
-    for index = 1:10
-        b(index,index) = B(index);
-        b(index,index) = B(index);
-        b(index,index)= B(index);  
-    end 
-    D = diag(sum(A,2));
-    L = D - A ;
-    M = L + b;
-    [m_eig_vector,m_eig] = eig(M);
-    [eig_value,ind] = sort(diag(m_eig));
-    B = B * 0.1;
 
     readings = sim.sensor_phase();
     controls = sim.control_agent(readings,[goal_x  goal_y]);
@@ -119,11 +105,14 @@ for i = 1:iterator
     vel =  distance/0.005;
     vel(1);
     i
+    v1 = pycontrol.vRef;
+    v1
     velocity = one_order_control(pose(:,1:11),goal_pose,vel(1),10,A,B,eig_value(3));
     for j =2:11
-        velocity_input = min(10,velocity(j-1));
+        velocity_input = min(9,velocity(j-1));
         controls{j}.vRef = velocity_input;
     end
+    velocity_input
     controls{12}.wRef = pycontrol.target_wRef;
     controls{12}.vRef = pycontrol.target_vRef;
     last_pose = pose;   

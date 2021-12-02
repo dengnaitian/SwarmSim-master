@@ -6,12 +6,12 @@ for j =1:11
     hold on;
 end
 grid on;
-title('Distance to goal point','fontsize',15);
+title('Distance between agent and target','fontsize',15);
 
-xlabel('Iterations','fontsize',15);
+xlabel('Iterations','fontsize', 15);
 ylabel('ditance to goal point [m]','fontsize',15);
 % xlim([0 27]);
-legend({'leader','agent1','agent2','agent3','agent4','agent5','agent6','agent7','agent8','agent9','agent10'},'fontsize',15);
+legend({'leader','agent1','agent2','agent3','agent4','agent5','agent6','agent7','agent8','agent9','agent10'},'fontsize',10      );
 %% ËÙ¶È»­Í¼
 % figure(2);
 % for i = 1:11
@@ -55,14 +55,14 @@ legend({'leader','agent1','agent2','agent3','agent4','agent5','agent6','agent7',
 % ylabel('error of velocity','fontsize',15);
 % % % ylim([-3 3]);
 % legend({'agent1','agent2','agent3','agent4','agent5','agent6','agent7','agent8','agent9','agent10'},'fontsize',15);
-figure(5);
-title('error of each graph');
-plot(allcostValue, 'linewidth',2);
-hold on;
-plot(finecostValue, 'linewidth',2);
-hold on;
-plot(mincostValue, 'linewidth',2);
-hold on;
-xlabel('Iterations','fontsize',15);
-ylabel('Cost value','fontsize',15);
-legend({'Strongly Connected Graph','Connected subgraph','Minimal connected graph'},'fontsize',15);
+% figure(5);
+% title('error of each graph');
+% plot(allcostValue, 'linewidth',2);
+% hold on;
+% plot(finecostValue, 'linewidth',2);
+% hold on;
+% plot(mincostValue, 'linewidth',2);
+% hold on;
+% xlabel('Iterations','fontsize',15);
+% ylabel('Cost value','fontsize',15);
+% legend({'Strongly Connected Graph','Connected subgraph','Minimal connected graph'},'fontsize',15);

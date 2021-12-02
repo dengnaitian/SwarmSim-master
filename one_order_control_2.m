@@ -16,8 +16,11 @@ function control = one_order_control_2(pose,goal_pose,leader_velocity,follower_n
         for j = 1: follower_nums
             a_ij = A_matrix(i,j);
             b_i0 = B_Matrix(i);
-            sigma = sigma +  a_ij * (foll_dis(i) - foll_dis(j)) + b_i0 * (foll_dis(i) -leader_dis);
+            % update the code  by naitiandeng 2021.11.24
+            % old :sigma = sigma +  a_ij * (foll_dis(i) - foll_dis(j)) + b_i0 * (foll_dis(i) -leader_dis)
+            sigma = sigma +  a_ij * (foll_dis(i) - foll_dis(j));
         end
+        sigma = sigma + b_i0 * (foll_dis(i) -leader_dis);
         % 由于简化了观测器，直接得到了速度，因此相当于每一个都有链接，没有实现全部断开
         % 假如与leader有联系，则获取v
         u(i) = (k) * sigma + v ;

@@ -60,13 +60,13 @@ class Control():
 		if pygame.key.get_pressed()[pygame.K_UP]:
 			self.movey=-1
 			self.y+=self.movey
-			self.vRef += 0.1
+			self.vRef += 1
 
 			# print('done_-x%f'%self.y)
 		if pygame.key.get_pressed()[pygame.K_DOWN]:
 			self.movey=+1
 			self.y+=self.movey
-			self.vRef -= 0.1
+			self.vRef -= 1
 
 
 		keys = pygame.key.get_pressed()

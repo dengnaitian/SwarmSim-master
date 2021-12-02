@@ -2,7 +2,7 @@ clear classes
 mod = py.importlib.import_module('myfun');
 py.importlib.reload(mod);
 pycontrol = py.myfun.Control;
-for i = 1:10
+for i = 1:300
     pycontrol.control3();
     pycontrol.update();
     w = pycontrol.wRef

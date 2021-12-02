@@ -28,14 +28,13 @@ A = [   [0,1,1,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,1,0,1,1],
         [0,0,0,0,0,0,1,1,0,1],
         [0,0,0,0,0,0,1,1,1,0]];   
-% %     
-
-B = [1,0,0,0,0,0,0,0,0,0];
-% B = [1,0,0,0,0,1,0,0,0,0];
+%%     
+% B = [1,0,0,0,0,0,0,0,0,0];
+B = [1,0,0,0,0,1,0,0,0,1];
 b = zeros(10);
 b(1,1) = 1;
 b(6,6) = 1;
-b(10,10) = 0;
+b(10,10) = 1;
 D = diag(sum(A,2));
 L = D - A ;
 M = L + b;
@@ -43,6 +42,7 @@ M = L + b;
 [eig_value,ind] = sort(diag(m_eig));
 A = A * 0.5;
 B = B * 0.1;
+%%
 %p = zeros(size*resolution);
 map_gen = MapGenerate(size,size,space,resolution);
 [p,map_gen] = map_gen.addBounds(2);
@@ -84,13 +84,16 @@ data_demo = zeros(8,230);
 goal_x = last_pose(1,12);
 goal_y = last_pose(2,12);
 goal_pose = [goal_x;goal_y];
-iterator = 599;
+iterator = 999;
 rec_traj = zeros(iterator,22);
 rec_dist = zeros(iterator,11);
 rec_speed = zeros(iterator,11);
 finecostValue = zeros(iterator+1,1);
+p = 0.8;
 for i = 1:iterator
-    B =  binornd(1,[0.7,0,0,0,0,0.7,0,0,0,0.7]);
+%     B =  binornd(1,[0.7,0,0,0,0,0.7,0,0,0,0.7]);
+    B =  binornd(1,[p,0,0,0,0,p,0,0,0,p]);
+%     B =  binornd(1,[1,0,0,0,0,1,0,0,0,1]);
     b = zeros(10);
     for index = 1:10
         b(index,index) = B(index);
@@ -104,10 +107,8 @@ for i = 1:iterator
     [m_eig_vector,m_eig] = eig(M);
     [eig_value,ind] = sort(diag(m_eig));
     % 2021.7.21 
-    A = A * 1;
-    B = B * 1;   
-    
-    
+%     A = A * 0.5;
+    B = B * 0.1;
     readings = sim.sensor_phase();
     controls = sim.control_agent(readings,[goal_x  goal_y]);
     pycontrol.control3();

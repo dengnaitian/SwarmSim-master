@@ -109,8 +109,6 @@ for i = 1:iterator
     % 2021.7.21 
 %     A = A * 0.5;
     B = B * 0.1;
-    
-    
     readings = sim.sensor_phase();
     controls = sim.control_agent(readings,[goal_x  goal_y]);
     pycontrol.control3();

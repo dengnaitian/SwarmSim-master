@@ -4,7 +4,7 @@ close all;
 % generate map for the simulation
 size = 25;
 resolution = 10;
-numObstacles = 0;
+numObstacles = 10;
 space = 5;
 % A = [   [0,1,0,0,0,0,0,0,0,0],
 %         [1,0,1,0,0,0,0,0,0,0],
@@ -43,7 +43,7 @@ map_gen = MapGenerate(size,size,space,resolution);
 [p,map_gen] = map_gen.addBounds(2);
 for i = 1:numObstacles
     %p = add_random_circle(p);
-    [p,map_gen] = map_gen.addRandomObstacle(1.0,0.5);
+    [p,map_gen] = map_gen.addRandomObstacle(1,0.5);
 end
 map = binaryOccupancyMap(p,resolution);
 
@@ -79,7 +79,7 @@ data_demo = zeros(8,230);
 goal_x = last_pose(1,12);
 goal_y = last_pose(2,12);
 goal_pose = [goal_x;goal_y];
-iterator = 799;
+iterator = 10;
 rec_traj = zeros(iterator,22);
 rec_dist = zeros(iterator,11);
 rec_speed = zeros(iterator,11);
@@ -115,11 +115,11 @@ for i = 1:iterator
     last_pose = pose;   
     pose = sim.actuate_phase_(controls);
     sim = sim.physics_phase(pose);
-    if( mod(i,2)==0)
+%     if( mod(i,2)==0)
         sim.visualize_agent([goal_x goal_y]);    
 %         axis([0 25 0 25])
         axis([0 size 0 size])
-    end
+%     end
 %     pause(0.00002);  
     rec_traj(i,1:11) = pose(1,1:11);
     rec_traj(i,12:22) = pose(2,1:11);
